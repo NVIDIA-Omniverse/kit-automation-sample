@@ -1,0 +1,52 @@
+[package]
+version = "1.0.0"
+authors = ["NVIDIA"]
+title = "kit_control"
+description = "Python extension for performing remote interactions on KIT based apps."
+readme = "docs/README.md"
+repository = "https://github.com/NVIDIA-Omniverse/kit-automation-sample"
+category = "internal"
+keywords = ["kit", "automation", "ui", "remote"]
+changelog = "docs/CHANGELOG.md"
+preview_image = "data/preview.png"
+icon = "data/icon.png"
+
+[[python.module]]
+name = "kit_control"
+
+[settings]
+# Server host and port
+exts."omni.services.transport.server.http".host = "127.0.0.1"
+exts."omni.services.transport.server.http".port = 9682
+
+# Flag to allow server to check ports in range if specified port is in use
+exts."omni.services.transport.server.http".allow_port_range = false
+
+# Server log level and uvicorn access log flag
+exts."omni.services.transport.server.http".log_level = "info"
+exts."omni.services.transport.server.http".enable_access_logs = false
+
+# Extra delay in seconds between user imitated actions in UI testing (for UI test development / debugging)
+exts."omni.kit.ui_test".humanDelay = 0.0
+
+# Log level for kit_control extension
+exts."kit_control".log_level = "info"
+
+[dependencies]
+"omni.ui" = {}
+"omni.ui_query" = {}
+"omni.kit.ui_test" = {}
+"omni.kit.viewport.utility" = {}
+"omni.services.core" = {}
+"omni.services.transport.server.http" = {order = -1000}
+"omni.kit.viewport.menubar.core" = {optional = true}
+"omni.kit.viewport.menubar.bottom" = { optional = true }
+"omni.kit.viewport.menubar.resolution" = { optional = true }
+
+[[test]]
+# Extra dependencies only to be used during test run
+dependencies = [
+    "omni.kit.ui_test", # UI testing extension
+]
+stdoutFailPatterns.exclude = [
+]
