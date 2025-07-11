@@ -1,8 +1,8 @@
-# Omniverse Code Sample - KIT Control
+# Omniverse KIT Automation Code Sample - omni.kit.test.automation.sample
 
 ## Table of Contents
 
-- [Omniverse Code Sample - KIT Control](#omniverse-code-sample---kit-control)
+- [Omniverse KIT Automation Code Sample - omni.kit.test.automation.sample](#omniverse-code-sample---omni.kit.test.automation.sample)
   - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
   - [How it works?](#how-it-works)
@@ -12,27 +12,31 @@
     - [Prerequisite](#prerequisite)
     - [Setup](#setup)
       - [1. Clone the repository](#1-clone-the-repository)
-      - [2. Importing into Omniverse KIT application](#2-importing-into-omniverse-kit-application)
-      - [3. Swagger Documentation](#3-swagger-documentation)
+      - [2. Creating USD Composer from Template](#2-creating-usd-composer-from-template)
+      - [3. Importing into Omniverse KIT application](#3-importing-into-omniverse-kit-application)
+      - [4. Swagger Documentation](#4-swagger-documentation)
     - [Basic Usage](#basic-usage)
-      - [Scenario 1 - _Find single and multiple widgets in the UI_](#scenario-1---find-single-and-multiple-widgets-in-the-ui)
-        - [Single widget](#single-widget)
-        - [Multiple Widgets](#multiple-widgets)
-      - [Scenario 2 - _Find a widget in the UI and perform double click on it_](#scenario-2---find-a-widget-in-the-ui-and-perform-double-click-on-it)
-      - [Scenario 3 - _Find a widget in the UI and send keys on it_](#scenario-3---find-a-widget-in-the-ui-and-send-keys-on-it)
-      - [Scenario 4 - _Right click and select context menu options_](#scenario-4---right-click-and-select-context-menu-options)
-      - [Scenario 5 - _Create a live session_](#scenario-5---create-a-live-session)
-      - [Scenario 6 - _Camera Fly forward in the scene for 5 seconds and then backwards for 5 seconds_](#scenario-6---camera-fly-forward-in-the-scene-for-5-seconds-and-then-backwards-for-5-seconds)
+      - [Scenario 1 - _Find single and multiple widgets in the UI_](examples/scenario_1.md)
+      - [Scenario 2 - _Find a widget in the UI and perform double click on it_](examples/scenario_2.md)
+      - [Scenario 3 - _Find a widget in the UI and send keys on it_](examples/scenario_3.md)
+      - [Scenario 4 - _Right click and select context menu options_](examples/scenario_4.md)
+      - [Scenario 5 - _Create a live session_](examples/scenario_5.md)
+      - [Scenario 6 - _Camera Fly forward in the scene for 5 seconds and then backwards for 5 seconds_](examples/scenario_6.md)
+      - [Scenario 7 - _Interact with menu items (e.g., Create/Mesh/Cone, File/Save)_](examples/scenario_7.md)
+      - [Scenario 8 - _Switch application mode (e.g., review, layout)_](examples/scenario_8.md)
+      - [Scenario 9 - _Interact with the Live State Widget dropdown using its center position_](examples/scenario_9.md)
+      - [Scenario 10 - _Interact with Viewport Toolbar Buttons (e.g., Dolly, Pan)_](examples/scenario_10.md)
+      - [Scenario 11 - _Interact with Viewport Menu Options (e.g., Toggle Inertia Mode)_](examples/scenario_11.md)
   - [License](#license)
   - [Contributing](#contributing)
 
 ## Overview
 
-Welcome to the `KIT Control` repository, which demonstrates how we can automate Omniverse KIT applications using the services framework, part of the KIT SDK. This repository provides a code sample for a REST API interface that enables users to control Omniverse KIT applications by sending various interaction commands. This code sample includes various REST APIs for different UI and non-UI interactions with the application.
+This Omniverse Kit Extension sample demonstrates how developers can automate testing of Omniverse Kit applications using the Kit SDK services framework. The sample makes use of a REST API interface enabling users and processes to control Omniverse Kit applications by sending various commands to execute UI and non-UI interactions. Developers are encouraged to use the sample as a starting point for implementing automated testing specific to their own Kit applications.
 
 ## How it works?
 
-`KIT Control` allows us to control KIT from an external entity. This extension enables remote UI interactions on the app running on a separate machine from the test itself or even on the same machine. It achieves this by wrapping mouse and keyboard simulation commands from the `ui_test` extension into REST APIs, which can then be accessed over the network using the existing server backend provided by KIT.
+`omni.kit.test.automation.sample` allows us to control KIT from an external entity. This extension enables remote UI interactions on the app running on a separate machine from the test itself or even on the same machine. It achieves this by wrapping mouse and keyboard simulation commands from the `ui_test` extension into REST APIs, which can then be accessed over the network using the existing server backend provided by KIT.
 
 The remote interaction feature allows us to perform complex scenarios, such as controlling multiple KIT instances on different machines synchronously and conducting remote UI interactions. This capability extends to localhost interactions as well.
 
@@ -72,7 +76,7 @@ This repository features sample REST APIs for various UI and Non-UI interactions
 | Directory Item | Purpose                                        |
 | -------------- | ---------------------------------------------- |
 | .vscode        | VS Code configuration details and helper tasks |
-| extensions/    | Code Sample for `kit_control` extension        |
+| extensions/    | Code Sample for `omni.kit.test.automation.sample` extension        |
 | .gitignore     | Git configuration.                             |
 | LICENSE.txt    | License for the repo.                          |
 | README.md      | Project information.                           |
@@ -84,7 +88,9 @@ This section guides you through importing this code sample as an extension into 
 
 ### Prerequisite
 
-This sample assumes that an Omniverse KIT application is already installed and set up in your system.
+This sample requires an Omniverse KIT application to run. You can either:
+- Use an existing Omniverse KIT application that's already installed on your system, or
+- Create a new USD Composer application using the Kit Application Template (covered in Step 2 below)
 
 ### Setup
 
@@ -94,341 +100,49 @@ Begin by cloning the `main` branch from this repo to your local workspace.
 
 If you are using windows, it is recommended to clone to a short directory path like C:/repos to avoid any file-path length issues (unless your workspace is configured to remove these limits).
 
-#### 2. Importing into Omniverse KIT application
+#### 2. Creating USD Composer from Template
+
+If you want to work with USD Composer specifically, you can create it directly from the Kit Application Template (KAT):
+
+1. Clone the [Kit Application Template](https://github.com/NVIDIA-Omniverse/kit-app-template) repository
+2. Run the template creation tool:
+   - **Linux:** `./repo.sh template new`
+   - **Windows:** `.\repo.bat template new`
+3. Select "Application" when prompted
+4. Choose "USD Composer" from the available templates
+5. Follow the configuration wizard to set up your USD Composer application
+
+This method provides a complete USD Composer application setup optimized for authoring complex OpenUSD scenes and configurators.
+
+#### 3. Importing the Automation Extension
+
+Import the automation extension into your KIT application (either an existing one or the USD Composer created in Step 2):
 
 1. Navigate to the location where your KIT application is present, locate the `bat` or `sh` file used to start the application.
-2. Via command line, we can add a single extension path to be loaded during startup along with enabling it.
-3. Refer following command as example: `app.bat --ext-folder path_to_the_extensions_folder --enable kit_control`.
-   1. Replace `app.bat` with the actual file name and `ext-folder` with the actual path of the `extensions` folder.
+2. Via command line, add the extension path and enable it during startup.
+3. Use the following command as example: `app.bat --ext-folder path_to_the_extensions_folder --enable omni.kit.test.automation.sample`.
+   1. Replace `app.bat` with the actual file name and `ext-folder` with the actual path of the `extensions` folder from Step 1.
 
-#### 3. Swagger Documentation
+#### 4. Swagger Documentation
 
 1. The application may or may not have a default port defined, which is used to host endpoints.
-2. If the port is defined, use `http://localhost:port` to access the swagger documentation. If no port is defined, the default port set in the code sample is `9682`.
+2. If the port is defined, use `http://localhost:port/docs` to access the swagger documentation. If no port is defined, the default port set in the code sample is `9682`.
 
 ### Basic Usage
 
-This section covers a few basic scenarios to help understand how the APIs are structured:
+All scenario examples have been moved to their own files for clarity and better organization. Please see the following files for detailed usage examples:
 
-#### Scenario 1 - _Find single and multiple widgets in the UI_
-
-To perform this scenario, use the `find_element` and `find_elements` APIs from `query.py`.
-
-##### Single widget
-
-```python
-import requests
-
-url = "http://localhost:port/find_element/"        # To be replaced by actual port
-headers = {
-"Content-Type": "application/json"
-}
-data = {
-"locator": "<locator_value>"               # Path of the widget to be queried
-}
-
-response = requests.post(url, headers=headers, json=data)
-
-if response.status_code == 201:
-  result = response.json()
-  element_id = result["element_id"]
-  message = result["message"]
-  properties = result["properties"]
-  print(f"Element found with ID {element_id}. Message: {message}. Properties: {properties}")
-else:
-  print(f"Request failed with status code {response.status_code}. Error: {response.text}")
-```
-
-##### Multiple Widgets
-
-```python
-import requests
-
-url = "http://localhost:port/find_elements/"       # To be replaced by actual port
-headers = {
-"Content-Type": "application/json"
-}
-data = {
-"locator": "<locator_value>",               # Path of the widget to be queried
-"get_properties": True
-}
-
-response = requests.post(url, headers=headers, json=data)
-
-if response.status_code == 201:
-    result = response.json()
-    elements = result["elements"]
-    count = result["count"]
-    print(f"Found {count} elements. Details:")
-    for element in elements:
-        element_id = element["element_id"]
-        message = element["message"]
-        properties = element["properties"]
-        print(f"Element ID: {element_id}. Message: {message}. Properties: {properties}")
-else:
-    print(f"Request failed with status code {response.status_code}. Error: {response.text}")
-```
-
-#### Scenario 2 - _Find a widget in the UI and perform double click on it_
-
-To perform this scenario, use the `find_element` and `double_click` APIs from `query.py` and `mouse.py`.
-
-```python
-import requests
-
-base_url = "http://localhost:port/"               # To be replaced by actual port
-headers = {
-"Content-Type": "application/json"
-}
-data = {
-"locator": "<locator_value>"              # Path of the widget to be queried
-}
-
-response = requests.post(base_url + "find_element/", headers=headers, json=data)
-
-if response.status_code == 201:
-    result = response.json()
-    element_id = result["element_id"]
-    message = result["message"]
-    properties = result["properties"]
-    print(
-        f"Element found with ID {element_id}. Message: {message}. Properties: {properties}"
-    )
-else:
-    print(
-        f"Request failed with status code {response.status_code}. Error: {response.text}"
-    )
-
-
-click_data = {
-    "element_id": element_id,  # Received in response of find_element API
-    "bring_to_front": False,   # Optional field, brings the widget to focus
-}
-mouse_response = requests.post(base_url + "click/", headers=headers, json=click_data)
-
-if mouse_response.status_code == 201:
-    result = response.json()
-    print("Element was clicked.")
-else:
-    print("Element was not clicked.")
-```
-
-#### Scenario 3 - _Find a widget in the UI and send keys on it_
-
-To perform this scenario, use the `find_element` and `send_keys_to_element` APIs from `query.py` and `keyboard.py`.
-
-```python
-import requests
-
-base_url = "http://localhost:port/"                # To be replaced by actual port
-headers = {
-"Content-Type": "application/json"
-}
-data = {
-"locator": "<locator_value>"               # Path of the widget to be queried
-}
-
-response = requests.post(base_url + "find_element/", headers=headers, json=data)
-
-if response.status_code == 201:
-    result = response.json()
-    element_id = result["element_id"]
-    message = result["message"]
-    properties = result["properties"]
-    print(
-        f"Element found with ID {element_id}. Message: {message}. Properties: {properties}"
-    )
-else:
-    print(
-        f"Request failed with status code {response.status_code}. Error: {response.text}"
-    )
-
-send_keys_data = {
-  "element_id":element_id,                  # Received in response of find_element API
-  "text": "hello",
-  "human_delay_speed": 20                   # Optional field to set the typing speed
-}
-keyboard_response = requests.post(
-    base_url + "send_keys_to_element/", headers=headers, json=send_keys_data
-)
-
-if keyboard_response.status_code == 201:
-    result = response.json()
-    print("Successfully sent keys to the element.")
-else:
-    print("Failure in sending keys to the element.")
-```
-
-#### Scenario 4 - _Right click and select context menu options_
-
-To perform this scenario, use the `find_element`, `click` and `context_menu_select` APIs from `query.py`, `menu.py` and `mouse.py`.
-
-```python
-import requests
-
-base_url = "http://localhost:port"                # To be replaced by actual port
-headers = {
-"Content-Type": "application/json"
-}
-data = {
-"locator": "<locator_value>"               # Path of the widget to be queried
-}
-response = requests.post(base_url + "find_element/", headers=headers, json=data)
-
-if response.status_code == 201:
-    result = response.json()
-    element_id = result["element_id"]
-    message = result["message"]
-    properties = result["properties"]
-    print(
-        f"Element found with ID {element_id}. Message: {message}. Properties: {properties}"
-    )
-else:
-    print(
-        f"Request failed with status code {response.status_code}. Error: {response.text}"
-    )
-
-
-double_click_data = {
-  "element_id":element_id,                  # Received in response of find_element API
-  "bring_to_front": False                   # Optional field, brings the widget to focus
-}
-mouse_response = requests.post(
-    base_url + "right_click/", headers=headers, json=double_click_data
-)
-
-menu_data ={
-  "path": "menu_path",                      # / separated path like Create/Prims/Cone
-  "offset_x": 50,                           # Optional field
-  "offset_y": 0,                            # Optional field
-  "human_delay_speed": 10                   # Optional field
-}
-
-menu_response = requests.post(
-    base_url + "context_menu_select/", headers=headers, json=menu_data
-)
-
-if menu_response.status_code == 201:
-    print("Successfully selected the context menu option.")
-else:
-    print("Failure in selecting context menu option.")
-
-```
-
-#### Scenario 5 - _Create a live session_
-
-To perform this scenario, use the `create_live_session` API from `live_session.py`.
-
-```python
-import requests
-
-base_url = "http://localhost:port/"                # To be replaced by actual port
-headers = {
-"Content-Type": "application/json"
-}
-create_session_data = {"session_name": "test_live_session"}
-
-create_session_response = requests.post(base_url + "create_live_session/", headers=headers, json=create_session_data)
-
-if create_session_response.status_code==201:
-    print("Successfully created live session.")
-else:
-    print("Failed to create live session.")
-
-```
-
-#### Scenario 6 - _Camera Fly forward in the scene for 5 seconds and then backwards for 5 seconds_
-
-To perform this scenario, use the `send_key_events`, and `right_click` APIs from `keyboard.py` and `mouse.py`.
-
-```python
-import requests
-
-# Define the API endpoint
-url = "http://localhost:port"
-
-# 1. Find a widget using its path
-find_element_url = f"{url}/find_element/"
-find_element_data = {
-    "locator": "Viewport//Frame/**/VStack[0]",
-}
-find_element_response = requests.post(find_element_url, json=find_element_data)
-
-if find_element_response.status_code == 201:
-    element_id = find_element_response.json()["element_id"]
-    print(f"Element found with ID: {element_id}")
-    center = find_element_response.json()["properties"]["center"]
-    x = center["x"]
-    y = center["y"]
-else:
-    print("Failed to find element")
-    exit()
-
-# 2. Perform a right-click-and-hold operation
-send_mouse_events_url = f"{url}/send_mouse_events/"
-click_and_hold_data = {
-    "x": x,
-    "y": y,
-    "right": True,
-    "hold": True,
-    "release": False,
-}
-click_and_hold_response = requests.post(send_mouse_events_url, json=click_and_hold_data)
-
-if click_and_hold_response.status_code == 201:
-    print("Right-click-and-hold performed")
-else:
-    print("Failed to perform right-click-and-hold")
-    exit()
-
-# 3. Send keyboard event for W key and hold the button for 5 seconds
-key_press_url = f"{url}/send_key_events/"
-key_press_data = {
-    "combo": "W",
-    "hold": False,
-    "release": False,
-    "hold_duration": 5,
-}
-key_press_response = requests.post(key_press_url, json=key_press_data)
-
-if key_press_response.status_code == 201:
-    print("W key pressed and held for 5 seconds")
-else:
-    print("Failed to press and hold W key")
-    exit()
-
-# 4. Send keyboard event for S key and hold the button for 5 seconds
-key_press_data = {
-    "combo": "S",
-    "hold": False,
-    "release": False,
-    "hold_duration": 5,
-}
-key_press_response = requests.post(key_press_url, json=key_press_data)
-
-if key_press_response.status_code == 201:
-    print("S key pressed and held for 5 seconds")
-else:
-    print("Failed to press and hold S key")
-    exit()
-
-# 5. Release the right click
-release_data = {
-    "x": x,
-    "y": y,
-    "right": True,
-    "hold": False,
-    "release": True,
-}
-release_response = requests.post(send_mouse_events_url, json=release_data)
-
-if release_response.status_code == 201:
-    print("Right click released")
-else:
-    print("Failed to release right click")
-    exit()
-
-```
+- [Scenario 1 - Find single and multiple widgets in the UI](examples/scenario_1.md)
+- [Scenario 2 - Find a widget in the UI and perform double click on it](examples/scenario_2.md)
+- [Scenario 3 - Find a widget in the UI and send keys on it](examples/scenario_3.md)
+- [Scenario 4 - Right click and select context menu options](examples/scenario_4.md)
+- [Scenario 5 - Create a live session](examples/scenario_5.md)
+- [Scenario 6 - Camera Fly forward in the scene for 5 seconds and then backwards for 5 seconds](examples/scenario_6.md)
+- [Scenario 7 - Interact with menu items (e.g., Create/Mesh/Cone, File/Save)](examples/scenario_7.md)
+- [Scenario 8 - Switch application mode (e.g., review, layout)](examples/scenario_8.md)
+- [Scenario 9 - Interact with the Live State Widget dropdown using its center position](examples/scenario_9.md)
+- [Scenario 10 - Interact with Viewport Toolbar Buttons (e.g., Dolly, Pan)](examples/scenario_10.md)
+- [Scenario 11 - Interact with Viewport Menu Options (e.g., Toggle Inertia Mode)](examples/scenario_11.md)
 
 ## License
 
