@@ -1,8 +1,8 @@
-# Omniverse KIT Automation Code Sample - omni.kit.test.automation.sample
+# Omniverse Kit Test Automation Sample
 
 ## Table of Contents
 
-- [Omniverse KIT Automation Code Sample - omni.kit.test.automation.sample](#omniverse-code-sample---omni.kit.test.automation.sample)
+- [Omniverse Kit Test Automation Sample](#omniverse-kit-test-automation-sample)
   - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
   - [How it works?](#how-it-works)
@@ -13,7 +13,7 @@
     - [Setup](#setup)
       - [1. Clone the repository](#1-clone-the-repository)
       - [2. Creating USD Composer from Template](#2-creating-usd-composer-from-template)
-      - [3. Importing into Omniverse KIT application](#3-importing-into-omniverse-kit-application)
+      - [3. Importing the Automation Extension](#3-importing-the-automation-extension)
       - [4. Swagger Documentation](#4-swagger-documentation)
     - [Basic Usage](#basic-usage)
       - [Scenario 1 - _Find single and multiple widgets in the UI_](examples/scenario_1.md)
@@ -36,9 +36,9 @@ This Omniverse Kit Extension sample demonstrates how developers can automate tes
 
 ## How it works?
 
-`omni.kit.test.automation.sample` allows us to control KIT from an external entity. This extension enables remote UI interactions on the app running on a separate machine from the test itself or even on the same machine. It achieves this by wrapping mouse and keyboard simulation commands from the `ui_test` extension into REST APIs, which can then be accessed over the network using the existing server backend provided by KIT.
+`omni.kit.test.automation.sample` allows us to control Kit from an external entity. This extension enables remote UI interactions on the app running on a separate machine from the test itself or even on the same machine. It achieves this by wrapping mouse and keyboard simulation commands from the `ui_test` extension into REST APIs, which can then be accessed over the network using the existing server backend provided by Kit.
 
-The remote interaction feature allows us to perform complex scenarios, such as controlling multiple KIT instances on different machines synchronously and conducting remote UI interactions. This capability extends to localhost interactions as well.
+The remote interaction feature allows us to perform complex scenarios, such as controlling multiple Kit instances on different machines synchronously and conducting remote UI interactions. This capability extends to localhost interactions as well.
 
 Backend utilizes the core of the Omniverse microservices stack, `omni.services.core`, which holds all base components to get started with microservices in Omniverse. `omni.services.core` uses the Kit runtime to execute the code, taking advantage of an extremely powerful extension system that provides the necessary abstractions to compose and build small and efficient apps.
 
@@ -49,7 +49,7 @@ Backend utilizes the core of the Omniverse microservices stack, `omni.services.c
 
 Any other extension within Omniverse can, via microservices, be exposed and triggered from external applications, and machines. They can be running alongside the main application, within the same process, or an external process.
 
-More information about `Services` framework in Omniverse KIT can be found [here](https://docs.omniverse.nvidia.com/services/latest/index.html).
+More information about `Services` framework in Omniverse Kit can be found [here](https://docs.omniverse.nvidia.com/services/latest/index.html).
 
 ## API Catalog
 
@@ -80,16 +80,16 @@ This repository features sample REST APIs for various UI and Non-UI interactions
 | .gitignore     | Git configuration.                             |
 | LICENSE.txt    | License for the repo.                          |
 | README.md      | Project information.                           |
-| SECUTIRY.md    | Security documentation for the repo.           |
+| SECURITY.md    | Security documentation for the repo.           |
 
 ## Quick Start
 
-This section guides you through importing this code sample as an extension into your Omniverse KIT application and its basic usage
+This section guides you through importing this code sample as an extension into your Omniverse Kit application and its basic usage
 
 ### Prerequisite
 
-This sample requires an Omniverse KIT application to run. You can either:
-- Use an existing Omniverse KIT application that's already installed on your system, or
+This sample requires an Omniverse Kit application to run. You can either:
+- Use an existing Omniverse Kit application that's already installed on your system, or
 - Create a new USD Composer application using the Kit Application Template (covered in Step 2 below)
 
 ### Setup
@@ -116,9 +116,9 @@ This method provides a complete USD Composer application setup optimized for aut
 
 #### 3. Importing the Automation Extension
 
-Import the automation extension into your KIT application (either an existing one or the USD Composer created in Step 2):
+Import the automation extension into your Kit application (either an existing one or the USD Composer created in Step 2):
 
-1. Navigate to the location where your KIT application is present, locate the `bat` or `sh` file used to start the application.
+1. Navigate to the location where your Kit application is present, locate the `bat` or `sh` file used to start the application.
 2. Via command line, add the extension path and enable it during startup.
 3. Use the following command as example: `app.bat --ext-folder path_to_the_extensions_folder --enable omni.kit.test.automation.sample`.
    1. Replace `app.bat` with the actual file name and `ext-folder` with the actual path of the `extensions` folder from Step 1.
