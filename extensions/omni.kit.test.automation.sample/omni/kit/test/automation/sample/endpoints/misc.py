@@ -52,6 +52,14 @@ def _encode_for_logging(text: str) -> str:
     return f"(encoded){base64.b64encode(text.encode('UTF-8')).decode('UTF-8')}"
 
 
+def _is_valid_image_path(path: str) -> bool:
+    """Return True when the path ends with a supported screenshot extension.
+
+    Supported extensions are ``png`` and ``jpeg`` (case-insensitive).
+    """
+    return os.path.splitext(path)[1].lower() in (".png", ".jpeg")
+
+
 @router.get("/automation_sample_status", tags=["Automation Sample Status"])
 async def automation_sample_status():
     """
@@ -316,7 +324,7 @@ async def capture_full_screenshot(request: ScreenshotRequest):
 
     import omni.renderer_capture
 
-    if "jpeg" in request.dir or "png" in request.dir:
+    if _is_valid_image_path(request.dir):
         try:
 
             renderer_capture = omni.renderer_capture.acquire_renderer_capture_interface()
