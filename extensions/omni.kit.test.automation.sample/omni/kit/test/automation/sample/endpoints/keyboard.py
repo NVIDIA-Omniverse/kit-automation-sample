@@ -233,7 +233,7 @@ async def send_key_press(
     else:
         await ui_test.input.emulate_keyboard(KeyboardEventType.KEY_PRESS, key)
         await asyncio.sleep(hold_duration)
-        await ui_test.input.emulate_keyboard(KeyboardEventType.KEY_PRESS, key)
+        await ui_test.input.emulate_keyboard(KeyboardEventType.KEY_RELEASE, key)
 
 
 @router.post(
